@@ -1,0 +1,15 @@
+name: Test Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  node:
+    name: Setup Node
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm --version
+      - run: node --version
