@@ -10,9 +10,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
+
+      - name: Check .nvmrc existence
+        id: check_file
+        uses: andstor/file-existence-action@v2
+        with:
+          files: ".nvmrc"
+      - name: Setup Node using .nvmrc
+        if: steps.check_file.outputs.files_exists == 'true'
         uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
+      - name: Setup Node using latest
+        if: steps.check_file.outputs.files_exists == 'false'
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'latest'          
       - run: npm --version
       - run: node --version
+        
