@@ -15,7 +15,7 @@ jobs:
         id: check_file
         uses: andstor/file-existence-action@v2
         with:
-          files: ".nvmrc"
+          files: ".nvmrcd"
       - name: Setup Node using .nvmrc
         if: steps.check_file.outputs.files_exists == 'true'
         uses: actions/setup-node@v3
